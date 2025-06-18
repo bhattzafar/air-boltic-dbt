@@ -21,7 +21,7 @@ clean-targets:
 
 models:
   air_boltic_dbt:       # ✅ Must match `name:` above
-    staging:
+    01_staging:
       +materialized: table
-    marts:
+    03_marts:
       +materialized: table
