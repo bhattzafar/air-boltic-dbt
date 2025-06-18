@@ -3,15 +3,25 @@ models:
     description: '{{ doc("stg_boltic_customers") }}'
     columns:
       - name: customer_id
-        description: Unique customer ID.
+        description: "{{ doc('customer_id') }}"
         tests:
-            - not_null
-            - unique
+          - not_null
+          - unique
       - name: customer_name
-        description: Customer’s full name.
+        description: "{{ doc('customer_name') }}"
+        tests:
+          - not_null
       - name: customer_group_id
-        description: Customer group identifier.
+        description: "{{ doc('customer_group_id') }}"
+        tests:
+          - not_null
       - name: customer_email
-        description: Email address.
+        description: "{{ doc('customer_email') }}"
+        tests:
+          - not_null
       - name: customer_phone_number
-        description: Phone number.
+        description: "{{ doc('customer_phone_number') }}"
+        tests:
+          - not_null:
+              severity: warn
+

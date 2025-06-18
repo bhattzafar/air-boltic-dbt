@@ -6,4 +6,6 @@ sources:
     schema: boltic_data_raw    # ✅ NO backticks
     tables:
       - name: air_boltic_data_customer
-        description: "Customer master table from Air Boltic ingest"
+        description: "Customer master table from Air Boltic ingest."
+      - name: air_boltic_data_customer_group
+        description: "Customer Group master table from Air Boltic ingest."

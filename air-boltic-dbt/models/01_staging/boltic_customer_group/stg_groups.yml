@@ -1,0 +1,25 @@
+models:
+  - name: stg_boltic_customer_groups
+    description: '{{ doc("stg_boltic_customer_groups") }}'
+    columns:
+      - name: customer_group_id
+        description: "{{ doc('customer_group_id') }}"
+        tests:
+          - not_null
+          - unique
+      - name: group_type
+        description: "{{ doc('group_type') }}"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['company', 'private group', 'organisation']
+      - name: customer_group_name
+        description: "{{ doc('customer_group_name') }}"
+        tests:
+          - not_null
+      - name: group_registry_number
+        description: "{{ doc('group_registry_number') }}"
+        tests:
+          - not_null:
+              severity: warn
+
