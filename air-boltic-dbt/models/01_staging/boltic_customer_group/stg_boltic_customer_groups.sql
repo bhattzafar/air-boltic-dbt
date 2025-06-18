@@ -2,9 +2,9 @@
     config(
         materialized='incremental',
         incremental_strategy='merge',
-        unique_key='customer_id',
+        unique_key='customer_group_id',
         on_schema_change='sync_all_columns',
-        cluster_by=['customer_group_id']
+        cluster_by=['group_type']
     )
 }}
 

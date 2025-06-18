@@ -15,6 +15,9 @@ models:
         description: "{{ doc('customer_group_id') }}"
         tests:
           - not_null
+          - relationships:
+              to: ref('stg_boltic_customer_groups')
+              field: customer_group_id
       - name: customer_email
         description: "{{ doc('customer_email') }}"
         tests:
