@@ -23,5 +23,7 @@ models:
   air_boltic_dbt:       # ✅ Must match `name:` above
     01_staging:
       +materialized: table
+    02_intermediate:
+      +materialized: table
     03_marts:
       +materialized: table
