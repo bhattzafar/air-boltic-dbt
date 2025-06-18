@@ -4,14 +4,15 @@ config-version: 2
 
 profile: air_boltic_dbt
 
-quoting:
-  database: false
-  schema: true         # ✅ This tells dbt to quote boltic-data-raw
-  identifier: false
-
 model-paths: ["models"]
 seed-paths: ["seeds"]
 macro-paths: ["macros"]
+docs-paths: ["docs"]
+
+quoting:
+  database: false
+  schema: true          # ✅ dbt will add backticks for the schema
+  identifier: false
 
 target-path: "target"
 clean-targets:

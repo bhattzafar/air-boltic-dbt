@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: air_boltic_data
+    catalog: workspace
+    schema: boltic_data_raw    # ✅ NO backticks
+    tables:
+      - name: air_boltic_data_customer
+        description: "Customer master table from Air Boltic ingest"

@@ -1,0 +1,17 @@
+models:
+  - name: stg_boltic_customers
+    description: '{{ doc("stg_boltic_customers") }}'
+    columns:
+      - name: customer_id
+        description: Unique customer ID.
+        tests:
+            - not_null
+            - unique
+      - name: customer_name
+        description: Customer’s full name.
+      - name: customer_group_id
+        description: Customer group identifier.
+      - name: customer_email
+        description: Email address.
+      - name: customer_phone_number
+        description: Phone number.
