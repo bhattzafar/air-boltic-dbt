@@ -12,7 +12,7 @@ WITH
 
 airplane_details AS (
     SELECT
-        dbt_utils.generate_surrogate_key(['make', 'model', 'engine_type']) AS airplane_details_id
+        {{ dbt_utils.generate_surrogate_key(["make", "model", "engine_type"]) }} AS airplane_details_id
         , LOWER(CAST(make AS STRING)) AS make
         , LOWER(CAST(model AS STRING)) AS model
         , LOWER(CAST(engine_type AS STRING)) AS engine_type

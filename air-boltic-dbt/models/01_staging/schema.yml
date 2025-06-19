@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: air_boltic_data
     catalog: workspace
-    schema: boltic_data_raw    # ✅ NO backticks
+    schema: boltic_data_raw 
     tables:
       - name: air_boltic_data_customer
         description: "Customer master table from Air Boltic ingest."
@@ -13,3 +13,12 @@ sources:
         description: "Airplane dimension model containing details like max_weight, max_passengers, etc."
       - name: air_boltic_data_aeroplane
         description: "Airplane master table from Air Boltic ingest."
+      - name: air_boltic_data_trip
+        description: "Trip master table from Air Boltic ingest."
+        loaded_at_field: "start_timestamp"
+        config:
+          freshness:
+            warn_after: {count: 1, period: hour}
+            error_after: {count: 2, period: hour}
+      - name: air_boltic_data_order
+        description: "Order master table from Air Boltic ingest."

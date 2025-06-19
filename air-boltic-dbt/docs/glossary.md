@@ -103,3 +103,55 @@ The maximum number of passenger seats configured for this aircraft model.
 {% docs max_weight %}
 The maximum takeoff weight of the aircraft in kilograms.
 {% enddocs %}
+
+{% docs stg_boltic_trips %}
+      This staging model contains flight-level data for all scheduled or completed trips in the Air Boltic system.
+
+      Each record represents a unique trip, including origin and destination, aircraft used, and timing details.
+{% enddocs %}
+
+{% docs trip_id %}
+A unique identifier for each flight trip. Serves as the primary key of the stg_boltic_trips model.
+{% enddocs %}
+
+{% docs origin_city %}
+The city from which the flight originated. Typically the city where the departure airport is located.
+{% enddocs %}
+
+{% docs destination_city %}
+The city where the flight is scheduled to land or has landed. Used for routing and reporting purposes.
+{% enddocs %}
+
+{% docs start_timestamp %}
+The exact timestamp at which the airplane took off or was scheduled to take off.
+{% enddocs %}
+
+{% docs end_timestamp %}
+The exact timestamp when the flight landed or was scheduled to land.
+{% enddocs %}
+
+{% docs trip_date %}
+The calendar date (in YYYY-MM-DD) format associated with the flight. Often derived from `start_timestamp` and used for partitioning.
+{% enddocs %}
+
+{% docs stg_boltic_orders %}
+      This staging model represents customer orders for flights in the Air Boltic system.
+
+      Each row corresponds to a booked order, capturing pricing, seat assignment, and status information, along with references to the customer and trip details.
+{% enddocs %}
+
+{% docs order_id %}
+A unique identifier for each order placed by a customer. Serves as the primary key of this model.
+{% enddocs %}
+
+{% docs price_eur %}
+The price of the order in euros. Represents the cost paid by the customer for the flight.
+{% enddocs %}
+
+{% docs seat_number %}
+The seat assigned to the customer for the trip. This value is typically alphanumeric (e.g., "12A").
+{% enddocs %}
+
+{% docs status %}
+The current status of the order. Example statuses may include `booked`, `cancelled`, or `completed`.
+{% enddocs %}

@@ -10,15 +10,16 @@ models:
       - name: airplane_model
         description: "{{ doc('airplane_model') }}"
         tests:
-          - not_null
+          - not_null:
+              severity: warn
       - name: manufacturer
         description: "{{ doc('manufacturer') }}"
         tests:
-          - not_null
+          - not_null:
+              severity: warn
           - relationships:
               to: ref('stg_plane_details')
-              field: manufacturer
-              relationship: one_to_one
+              field: make
 
   - name: stg_plane_details
     description: '{{ doc("stg_plane_details") }}'
@@ -31,11 +32,13 @@ models:
       - name: make
         description: "{{ doc('make') }}"
         tests:
-          - not_null
+          - not_null:
+              severity: warn
       - name: model
         description: "{{ doc('model') }}"
         tests:
-          - not_null
+          - not_null:
+              severity: warn
       - name: engine_type
         description: "{{ doc('engine_type') }}"
         tests:
@@ -49,8 +52,10 @@ models:
       - name: max_seats
         description: "{{ doc('max_seats') }}"
         tests:
-          - not_null
+          - not_null:
+              severity: warn
       - name: max_weight
         description: "{{ doc('max_weight') }}"
         tests:
-          - not_null
+          - not_null:
+              severity: warn

@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: stg_boltic_orders
+    description: '{{ doc("stg_boltic_orders") }}'
+    columns:
+      - name: order_id
+        description: "{{ doc('order_id') }}"
+        tests:
+          - not_null
+          - unique 
+      - name: customer_id
+        description: "{{ doc('customer_id') }}"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_boltic_customers')
+              field: customer_id
+      - name: trip_id
+        description: "{{ doc('trip_id') }}"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_boltic_trips')
+              field: trip_id
+      - name: price_eur
+        description: "{{ doc('price_eur') }}"
+        tests:
+          - not_null
+      - name: seat_number
+        description: "{{ doc('seat_number') }}"
+        tests:
+          - not_null
+      - name: status
+        description: "{{ doc('status') }}"
+        tests:
+          - not_null
+          

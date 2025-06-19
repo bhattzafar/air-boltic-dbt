@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: stg_boltic_trips
+    description: '{{ doc("stg_boltic_trips") }}'
+    columns:
+      - name: trip_id
+        description: "{{ doc('trip_id') }}"
+        tests:
+          - not_null
+          - unique
+      - name: origin_city
+        description: "{{ doc('origin_city') }}"
+        tests:
+          - not_null:
+              severity: warn
+      - name: destination_city
+        description: "{{ doc('destination_city') }}"
+        tests:
+          - not_null:
+              severity: warn
+      - name: airplane_id
+        description: "{{ doc('airplane_id') }}"
+        tests:
+          - not_null:
+              severity: warn
+          - relationships:
+              to: ref('stg_boltic_planes')
+              field: airplane_id
+      - name: start_timestamp
+        description: "{{ doc('start_timestamp') }}"
+        tests:
+          - not_null:
+              severity: warn
+      - name: end_timestamp
+        description: "{{ doc('end_timestamp') }}"
+        tests:
+          - not_null:
+              severity: warn
+      - name: trip_date
+        description: "{{ doc('trip_date') }}"
