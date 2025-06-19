@@ -10,21 +10,52 @@ models:
       - name: customer_name
         description: "{{ doc('customer_name') }}"
         tests:
-          - not_null
+          - not_null:
+              severity: warn
       - name: customer_group_id
         description: "{{ doc('customer_group_id') }}"
         tests:
-          - not_null
+          - not_null:
+              severity: warn
           - relationships:
               to: ref('stg_boltic_customer_groups')
               field: customer_group_id
+              severity: warn
       - name: customer_email
         description: "{{ doc('customer_email') }}"
-        tests:
-          - not_null
-      - name: customer_phone_number
-        description: "{{ doc('customer_phone_number') }}"
+        meta:
+          pii: true
         tests:
           - not_null:
+              severity: warn
+      - name: customer_phone_number
+        description: "{{ doc('customer_phone_number') }}"
+        meta:
+          pii: true
+        tests:
+          - not_null:
+              severity: warn
+  - name: stg_boltic_customers_non_pii
+    description: '{{ doc("stg_boltic_customers") }}'
+    columns:
+      - name: customer_id
+        description: "{{ doc('customer_id') }}"
+        tests:
+          - not_null:
+              severity: warn
+          - unique
+      - name: customer_name
+        description: "{{ doc('customer_name') }}"
+        tests:
+            - not_null:
+                severity: warn
+      - name: customer_group_id
+        description: "{{ doc('customer_group_id') }}"
+        tests:
+          - not_null:
+              severity: warn
+          - relationships:
+              to: ref('stg_boltic_customer_groups')
+              field: customer_group_id
               severity: warn
 

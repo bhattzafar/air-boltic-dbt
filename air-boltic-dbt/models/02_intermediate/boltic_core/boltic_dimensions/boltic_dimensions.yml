@@ -1,0 +1,105 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: "{{ doc('stg_boltic_customers_non_pii_enriched') }}"
+    columns:
+      - name: customer_id
+        description: "{{ doc('customer_id') }}"
+        tests:
+          - not_null
+          - unique
+
+      - name: customer_name
+        description: "{{ doc('customer_name') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: customer_group_id
+        description: "{{ doc('customer_group_id') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: email_domain
+        description: "{{ doc('email_domain') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: country_code
+        description: "{{ doc('country_code') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: customer_group_name
+        description: "{{ doc('customer_group_name') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: customer_country
+        description: "{{ doc('customer_country') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+
+  - name: dim_planes
+    description: "{{ doc('dim_planes') }}"
+    columns:
+      - name: airplane_id
+        description: "{{ doc('airplane_id') }}"
+        tests:
+          - not_null
+          - unique
+
+      - name: airplane_model
+        description: "{{ doc('airplane_model') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: manufacturer
+        description: "{{ doc('manufacturer') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: make
+        description: "{{ doc('make') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: model
+        description: "{{ doc('model') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: engine_type
+        description: "{{ doc('engine_type') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: max_distance
+        description: "{{ doc('max_distance') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: max_seats
+        description: "{{ doc('max_seats') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: max_weight
+        description: "{{ doc('max_weight') }}"
+        tests:
+          - not_null:
+              severity: warn

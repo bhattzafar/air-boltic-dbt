@@ -155,3 +155,29 @@ The seat assigned to the customer for the trip. This value is typically alphanum
 {% docs status %}
 The current status of the order. Example statuses may include `booked`, `cancelled`, or `completed`.
 {% enddocs %}
+
+
+{% docs stg_boltic_customers_non_pii_enriched %}
+      This model enriches the customer dataset by:
+      - Pulling in non-PII attributes from the staging layer
+      - Joining with customer group metadata
+      - Deriving `country` from `country_code` using a seed mapping
+      It ensures personal data like email and phone numbers are excluded, supporting GDPR compliance.
+{% enddocs %}
+
+{% docs email_domain %}
+The domain portion of the customer’s email address (e.g., gmail.com), extracted for analytical use.
+{% enddocs %}
+
+{% docs country_code %}
+The dialing prefix (e.g., +49, +1) extracted from the customer's phone number.
+{% enddocs %}
+
+{% docs customer_country %}
+The derived country name (in lowercase) that corresponds to the customer's phone country code.
+{% enddocs %}
+
+{% docs dim_planes %}
+      This model enriches airplane metadata by joining basic plane identifiers with detailed specifications like engine type, seating capacity, and range. It merges `stg_boltic_planes` with `stg_plane_details` using cleaned manufacturer and model names. Deduplication is handled using airplane ID and manufacturer.
+{% enddocs %}
+

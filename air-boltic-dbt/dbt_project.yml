@@ -11,7 +11,7 @@ docs-paths: ["docs"]
 
 quoting:
   database: false
-  schema: true          # ✅ dbt will add backticks for the schema
+  schema: true
   identifier: false
 
 target-path: "target"
@@ -20,7 +20,7 @@ clean-targets:
   - "dbt_packages"
 
 models:
-  air_boltic_dbt:       # ✅ Must match `name:` above
+  air_boltic_dbt:
     01_staging:
       +materialized: table
     02_intermediate:
