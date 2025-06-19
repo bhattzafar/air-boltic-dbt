@@ -9,3 +9,7 @@ sources:
         description: "Customer master table from Air Boltic ingest."
       - name: air_boltic_data_customer_group
         description: "Customer Group master table from Air Boltic ingest."
+      - name: air_boltic_data_aeroplane_details
+        description: "Airplane dimension model containing details like max_weight, max_passengers, etc."
+      - name: air_boltic_data_aeroplane
+        description: "Airplane master table from Air Boltic ingest."

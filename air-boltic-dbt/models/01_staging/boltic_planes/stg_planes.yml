@@ -1,0 +1,56 @@
+models:
+  - name: stg_boltic_planes
+    description: '{{ doc("stg_boltic_planes") }}'
+    columns:
+      - name: airplane_id
+        description: "{{ doc('airplane_id') }}"
+        tests:
+          - not_null
+          - unique
+      - name: airplane_model
+        description: "{{ doc('airplane_model') }}"
+        tests:
+          - not_null
+      - name: manufacturer
+        description: "{{ doc('manufacturer') }}"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_plane_details')
+              field: manufacturer
+              relationship: one_to_one
+
+  - name: stg_plane_details
+    description: '{{ doc("stg_plane_details") }}'
+    columns:
+      - name: airplane_details_id
+        description: "{{ doc('airplane_details_id') }}"
+        tests:
+          - not_null
+          - unique
+      - name: make
+        description: "{{ doc('make') }}"
+        tests:
+          - not_null
+      - name: model
+        description: "{{ doc('model') }}"
+        tests:
+          - not_null
+      - name: engine_type
+        description: "{{ doc('engine_type') }}"
+        tests:
+          - not_null:
+              severity: warn
+      - name: max_distance
+        description: "{{ doc('max_distance') }}"
+        tests:
+          - not_null:
+              severity: warn
+      - name: max_seats
+        description: "{{ doc('max_seats') }}"
+        tests:
+          - not_null
+      - name: max_weight
+        description: "{{ doc('max_weight') }}"
+        tests:
+          - not_null

@@ -50,3 +50,56 @@ The full name of the customer group or organization. Used for display and report
 {% docs group_registry_number %}
 An optional registry or official identification number for the group. May be blank for informal groups.
 {% enddocs %}
+
+{% docs stg_boltic_planes %}
+      This model contains the list of airplanes operated by Air Boltic, along with their assigned IDs, models, and manufacturers.
+
+      Each record represents a unique aircraft in the system and is validated against detailed manufacturer data to ensure consistency.
+{% enddocs %}
+
+{% docs airplane_id %}
+A unique identifier for each airplane in the Air Boltic fleet. This ID is used to join airplane records with related details.
+{% enddocs %}
+
+{% docs airplane_model %}
+The commercial model name of the airplane (e.g., A320neo, 787-9). Used to group aircraft by design.
+{% enddocs %}
+
+{% docs manufacturer %}
+The company that manufactured the airplane. This field links to the stg_plane_details model to retrieve specs like engine type and capacity.
+{% enddocs %}
+
+
+{% docs stg_plane_details %}
+      This model stores technical specifications and design information for all known airplane models used by Air Boltic.
+
+      Each entry represents a unique combination of make and model, providing details about performance and capacity.
+{% enddocs %}
+
+{% docs airplane_details_id %}
+A unique identifier for each airplane detail entry. Used to distinguish distinct combinations of make and model.
+{% enddocs %}
+
+{% docs make %}
+The name of the airplane manufacturer (e.g., Boeing, Airbus). Combined with model to identify an aircraft type.
+{% enddocs %}
+
+{% docs model %}
+The specific aircraft model made by the manufacturer (e.g., A350-900, 737-800).
+{% enddocs %}
+
+{% docs engine_type %}
+The type of engine installed in the airplane (e.g., Rolls-Royce Trent XWB, CFM LEAP-1A).
+{% enddocs %}
+
+{% docs max_distance %}
+The maximum flight distance the aircraft can travel on a full tank, measured in nautical miles.
+{% enddocs %}
+
+{% docs max_seats %}
+The maximum number of passenger seats configured for this aircraft model.
+{% enddocs %}
+
+{% docs max_weight %}
+The maximum takeoff weight of the aircraft in kilograms.
+{% enddocs %}
