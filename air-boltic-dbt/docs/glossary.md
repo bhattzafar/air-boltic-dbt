@@ -243,3 +243,36 @@ while `fact_trips` represents supply-side operational performance.
 Timestamp of the trip associated with this order, used as a proxy for booking time.
 {% enddocs %}
 
+{% docs int_market_success %}
+    Market-level metrics model with one row per destination_city. Includes trip-level and order-level KPIs across 7d, 15d, and 30d lookback windows.
+    Designed for evaluating geographic success patterns, growth trends, and early signals for market activation.
+{% enddocs %}
+
+{% docs trip_count_7d %}
+    Number of unique trips that arrived in the destination_city during the past 7 days.
+{% enddocs %}
+
+{% docs avg_utilization_pct_7d %}
+    Average seat utilization (booked seats ÷ max capacity) across trips to this market over 7 days.
+{% enddocs %}
+
+{% docs total_orders_7d %}
+    Total number of booking orders made for trips to the destination_city over the last 7 days.
+{% enddocs %}
+
+{% docs total_revenue_7d %}
+    Aggregated booking revenue (EUR) generated from orders to this city over the last 7 days.
+{% enddocs %}
+
+{% docs avg_ticket_price_7d %}
+    Average price (EUR) per booking over trips to the destination_city in the last 7 days.
+{% enddocs %}
+
+{% docs pct_confirmed_orders_7d %}
+    Proportion of bookings with status = "confirmed" among all orders for trips to this market over 7 days.
+{% enddocs %}
+
+{% docs repeat_customer_pct_7d %}
+    Proportion of orders placed by repeat customers (i.e., customers who booked more than once) in the past 7 days.
+{% enddocs %}
+

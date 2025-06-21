@@ -1,0 +1,102 @@
+version: 2
+
+models:
+  - name: int_market_success
+    description: "{{ doc('int_market_success') }}"
+    columns:
+      - name: destination_city
+        description: "{{ doc('destination_city') }}"
+        tests:
+          - not_null:
+              severity: warn
+          - unique:
+              severity: warn
+
+      # 7-day window metrics
+
+      - name: trip_count_7d
+        description: "{{ doc('trip_count_7d') }}"
+        tests:
+          - not_null:
+              severity: warn
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              severity: warn
+
+      - name: avg_utilization_pct_7d
+        description: "{{ doc('avg_utilization_pct_7d') }}"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0.0
+              max_value: 1.0
+              severity: warn
+
+      - name: total_orders_7d
+        description: "{{ doc('total_orders_7d') }}"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              severity: warn
+
+      - name: total_revenue_7d
+        description: "{{ doc('total_revenue_7d') }}"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              severity: warn
+
+      - name: avg_ticket_price_7d
+        description: "{{ doc('avg_ticket_price_7d') }}"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 10000  # generous cap for ticket price sanity
+              severity: warn
+
+      - name: pct_confirmed_orders_7d
+        description: "{{ doc('pct_confirmed_orders_7d') }}"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 1
+              severity: warn
+
+      - name: repeat_customer_pct_7d
+        description: "{{ doc('repeat_customer_pct_7d') }}"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 1
+              severity: warn
+
+      # ---------------------------------------------------------------
+      # 15-day and 30-day fields follow the same structure as above.
+      # Use the same doc() tags and replicate the tests for:
+      #   - trip_count_15d / 30d
+      #   - avg_utilization_pct_15d / 30d
+      #   - total_orders_15d / 30d
+      #   - total_revenue_15d / 30d
+      #   - avg_ticket_price_15d / 30d
+      #   - pct_confirmed_orders_15d / 30d
+      #   - repeat_customer_pct_15d / 30d
+      # ---------------------------------------------------------------
+    tests:
+      - test_metric_is_trending_up:
+          metric: total_revenue
+          severity: warn
+
+      - test_metric_is_trending_up:
+          metric: avg_utilization_pct
+          severity: warn
+
+      - test_metric_is_trending_up:
+          metric: trip_count
+          severity: warn
+
+      - test_metric_is_trending_up:
+          metric: total_orders
+          severity: warn
+
+      - test_metric_is_trending_up:
+          metric: avg_ticket_price
+          severity: warn

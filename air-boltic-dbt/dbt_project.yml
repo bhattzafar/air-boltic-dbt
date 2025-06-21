@@ -8,6 +8,7 @@ model-paths: ["models"]
 seed-paths: ["seeds"]
 macro-paths: ["macros"]
 docs-paths: ["docs"]
+test-paths: ["tests"]
 
 quoting:
   database: false
