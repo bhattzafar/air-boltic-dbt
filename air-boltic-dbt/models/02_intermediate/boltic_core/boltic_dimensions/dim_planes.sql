@@ -54,8 +54,8 @@ airplane_id AS (
     LEFT JOIN
         airplane_details AS dt
         ON
-            LOWER(ar.manufacturer) =   LOWER(dt.make)
-            AND LOWER(ar.airplane_model) = LOWER(dt.engine_type)
+            LOWER(ar.manufacturer) = LOWER(dt.make)
+            AND LOWER(ar.airplane_model) = LOWER(dt.model)
 )
 
 , remove_duplicates AS (

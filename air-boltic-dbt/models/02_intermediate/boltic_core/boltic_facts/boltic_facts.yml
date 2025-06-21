@@ -1,0 +1,62 @@
+version: 2
+
+models:
+  - name: fact_trips
+    description: "{{ doc('fact_trips') }}"
+    columns:
+      - name: trip_id
+        description: "{{ doc('trip_id') }}"
+        tests:
+          - not_null:
+              severity: warn
+          - unique:
+              severity: warn
+
+      - name: airplane_id
+        description: "{{ doc('airplane_id') }}"
+
+      - name: start_timestamp
+        description: "{{ doc('start_timestamp') }}"
+
+      - name: end_timestamp
+        description: "{{ doc('end_timestamp') }}"
+
+      - name: origin_city
+        description: "{{ doc('origin_city') }}"
+
+      - name: destination_city
+        description: "{{ doc('destination_city') }}"
+
+      - name: duration_min
+        description: "{{ doc('duration_min') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: total_orders
+        description: "{{ doc('total_orders') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: seats_booked
+        description: "{{ doc('seats_booked') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: trip_revenue
+        description: "{{ doc('trip_revenue') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: max_seats
+        description: "{{ doc('max_seats') }}"
+
+      - name: utilization_pct
+        description: "{{ doc('utilization_pct') }}"
+        
+    tests:
+      - dbt_utils.expression_is_true:
+          expression: "utilization_pct <= 1"

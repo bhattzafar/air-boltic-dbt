@@ -181,3 +181,27 @@ The derived country name (in lowercase) that corresponds to the customer's phone
       This model enriches airplane metadata by joining basic plane identifiers with detailed specifications like engine type, seating capacity, and range. It merges `stg_boltic_planes` with `stg_plane_details` using cleaned manufacturer and model names. Deduplication is handled using airplane ID and manufacturer.
 {% enddocs %}
 
+{% docs fact_trips %}
+      Trip-level fact table capturing enriched and aggregated information about each flight, including booking counts, revenue, and seat utilization.
+{% enddocs %}
+
+{% docs duration_min %}
+Duration of the trip in minutes, calculated as the difference between `start_timestamp` and `end_timestamp`.
+{% enddocs %}
+
+{% docs total_orders %}
+Number of distinct customer orders associated with the trip.
+{% enddocs %}
+
+{% docs seats_booked %}
+Total number of seats booked on the trip.
+{% enddocs %}
+
+{% docs trip_revenue %}
+Total monetary value of all customer orders associated with the trip.
+{% enddocs %}
+
+{% docs utilization_pct %}
+Percentage of seats booked relative to the aircraft's total seating capacity.
+{% enddocs %}
+
