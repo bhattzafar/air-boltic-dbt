@@ -276,3 +276,11 @@ Timestamp of the trip associated with this order, used as a proxy for booking ti
     Proportion of orders placed by repeat customers (i.e., customers who booked more than once) in the past 7 days.
 {% enddocs %}
 
+{% docs int_airplane_market_success %}
+      This model evaluates the success of airplane makes across different destination markets by aggregating trip and order metrics over multiple rolling time windows (7, 15, 30 days). It helps analyze which aircraft types perform better in specific regions — valuable for fleet planning and route optimization.
+{% enddocs %}
+
+{% docs airplane_make %}
+The manufacturing make of an airplane (e.g., Boeing 737, Cessna Citation), used here as a proxy for airline or aircraft type performance analysis.
+{% enddocs %}
+

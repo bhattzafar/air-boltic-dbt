@@ -100,3 +100,98 @@ models:
       - test_metric_is_trending_up:
           metric: avg_ticket_price
           severity: warn
+
+version: 2
+
+models:
+  - name: int_airplane_market_success
+    description: "{{ doc('int_airplane_market_success') }}"
+    columns:
+      - name: destination_city
+        description: "{{ doc('destination_city') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: airplane_make
+        description: "{{ doc('airplane_make') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      # 7-day window metrics
+      - name: trip_count_7d
+        description: "{{ doc('trip_count_7d') }}"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              severity: warn
+
+      - name: avg_utilization_pct_7d
+        description: "{{ doc('avg_utilization_pct_7d') }}"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0.0
+              max_value: 1.0
+              severity: warn
+
+      - name: total_orders_7d
+        description: "{{ doc('total_orders_7d') }}"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              severity: warn
+
+      - name: total_revenue_7d
+        description: "{{ doc('total_revenue_7d') }}"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              severity: warn
+
+      - name: avg_ticket_price_7d
+        description: "{{ doc('avg_ticket_price_7d') }}"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 10000
+              severity: warn
+
+      - name: pct_confirmed_orders_7d
+        description: "{{ doc('pct_confirmed_orders_7d') }}"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0.0
+              max_value: 1.0
+              severity: warn
+
+      - name: repeat_customer_pct_7d
+        description: "{{ doc('repeat_customer_pct_7d') }}"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0.0
+              max_value: 1.0
+              severity: warn
+
+      # The same pattern applies for 15-day and 30-day windows. 
+      # Metrics are identical with suffix _15d and _30d respectively.
+    tests:
+      - test_metric_is_trending_up:
+          metric: total_revenue
+          severity: warn
+
+      - test_metric_is_trending_up:
+          metric: avg_utilization_pct
+          severity: warn
+
+      - test_metric_is_trending_up:
+          metric: trip_count
+          severity: warn
+
+      - test_metric_is_trending_up:
+          metric: total_orders
+          severity: warn
+
+      - test_metric_is_trending_up:
+          metric: avg_ticket_price
+          severity: warn
