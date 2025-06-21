@@ -56,7 +56,102 @@ models:
 
       - name: utilization_pct
         description: "{{ doc('utilization_pct') }}"
-        
+
     tests:
       - dbt_utils.expression_is_true:
           expression: "utilization_pct <= 1"
+
+version: 2
+
+models:
+  - name: fact_orders
+    description: "{{ doc('fact_orders') }}"
+    columns:
+      - name: order_id
+        description: "{{ doc('order_id') }}"
+        tests:
+          - not_null:
+              severity: warn
+          - unique:
+              severity: warn
+
+      - name: trip_id
+        description: "{{ doc('trip_id') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: customer_id
+        description: "{{ doc('customer_id') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: seat_number
+        description: "{{ doc('seat_number') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: price_eur
+        description: "{{ doc('price_eur') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: status
+        description: "{{ doc('status') }}"
+        tests:
+          - not_null:
+              severity: warn
+          - accepted_values:
+              values: ["confirmed", "cancelled", "failed"]
+              severity: warn
+
+      - name: booking_ts
+        description: "{{ doc('booking_ts') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: airplane_id
+        description: "{{ doc('airplane_id') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: origin_city
+        description: "{{ doc('origin_city') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: destination_city
+        description: "{{ doc('destination_city') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: customer_group_id
+        description: "{{ doc('customer_group_id') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: customer_group_name
+        description: "{{ doc('customer_group_name') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: email_domain
+        description: "{{ doc('email_domain') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: customer_country
+        description: "{{ doc('customer_country') }}"
+        tests:
+          - not_null:
+              severity: warn

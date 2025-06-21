@@ -9,8 +9,34 @@
 }}
 
 /*
-    This model creates a trip-level fact table
-    Includes derived metrics like seat utilization, duration, and revenue.
+================================================================================
+MODEL: fact_trips
+--------------------------------------------------------------------------------
+Grain: 1 row per trip_id
+
+This model aggregates trip-level data to provide insights into operational
+efficiency and network performance. It is designed to answer questions like:
+
+- How full are our planes (seat utilization)?
+- How much revenue does each trip generate?
+- What is the average trip duration by route or aircraft?
+- Which trips/routes are performing best by seat fill or revenue?
+
+Key metrics include:
+- total_orders
+- seats_booked
+- trip_revenue
+- utilization_pct (booked seats / plane capacity)
+- trip duration (in minutes)
+
+This model is especially useful for:
+- Route optimization
+- Aircraft utilization analysis
+- Monitoring business KPIs like DAUs, revenue per trip, load factor
+
+It complements `fact_orders` by providing the **supply-side** and **trip-level**
+view of operations, while `fact_orders` focuses on individual customer behavior.
+================================================================================
 */
 WITH
 

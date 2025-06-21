@@ -182,7 +182,25 @@ The derived country name (in lowercase) that corresponds to the customer's phone
 {% enddocs %}
 
 {% docs fact_trips %}
-      Trip-level fact table capturing enriched and aggregated information about each flight, including booking counts, revenue, and seat utilization.
+The `fact_trips` model captures enriched, trip-level data that aggregates operational and commercial performance for each flight operated through the Air Boltic platform.
+
+Each row represents a single trip (flight) and includes metrics such as:
+- Number of customer orders (bookings)
+- Total seats booked
+- Revenue generated per trip
+- Duration of the flight
+- Seat utilization percentage (booked / max seats)
+
+This model is critical for:
+- Evaluating aircraft and route performance
+- Monitoring load factors and optimizing scheduling
+- Comparing revenue vs capacity across different regions or plane types
+- Identifying high-demand vs underutilized city pairs
+- Supporting product decisions around network expansion and dynamic pricing
+
+It complements `fact_orders`, which provides a customer-level lens,
+by offering a **supply-side view** optimized for operational monitoring,
+business health metrics, and executive-level KPIs.
 {% enddocs %}
 
 {% docs duration_min %}
@@ -203,5 +221,25 @@ Total monetary value of all customer orders associated with the trip.
 
 {% docs utilization_pct %}
 Percentage of seats booked relative to the aircraft's total seating capacity.
+{% enddocs %}
+
+{% docs fact_orders %}
+The `fact_orders` model contains customer-level transactional data from the Air Boltic platform.
+Each row represents a single seat booking (order) by a customer, enriched with related metadata 
+from the trip and customer dimensions.
+
+This model is essential for:
+- Understanding who books, when, and how much they pay
+- Segmenting revenue by customer type, geography, or group
+- Analyzing pricing strategy effectiveness
+- Building conversion and retention funnels
+- Supporting growth analytics with customer behavior insights
+
+It complements `fact_trips` by offering a **demand-side view** focused on users and monetization,
+while `fact_trips` represents supply-side operational performance.
+{% enddocs %}
+
+{% docs booking_ts %}
+Timestamp of the trip associated with this order, used as a proxy for booking time.
 {% enddocs %}
 
