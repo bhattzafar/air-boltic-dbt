@@ -57,3 +57,8 @@ models:
         tests:
           - not_null:
               severity: warn
+
+    tests:
+      - dbt_utils.expression_is_true:
+          expression: "success_score >= 0.4"
+          severity: warn
