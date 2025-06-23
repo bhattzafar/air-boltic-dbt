@@ -21,18 +21,20 @@ across all historical events (trips/orders).
     on_schema_change = 'sync_all_columns'
 ) }}
 
--- Import useful macros
-{% set start_date = '2023-01-01' %}
-{% set end_date = '2025-12-31' %} -- Horizon for future planning
 
--- Date spine generation
 WITH
+
 date_spine AS (
-    {{ dbt_utils.date_spine(0
-        datepart="day",
-        start_date=start_date,
-        end_date=end_date
-    ) }}
+    SELECT
+        date_day::DATE
+    FROM
+        {{ ref('stg_dates') }}
+    WHERE
+        {% if is_incremental() %}
+            date_day >= (SELECT MAX(snapshot_date) FROM {{ this }})
+        {% else %}
+            date_day >= '2023-01-01'
+        {% endif %}
 )
 
 -- Join fact_trips and fact_orders onto the spine
@@ -43,7 +45,7 @@ date_spine AS (
         , t.utilization_pct
         , t.start_timestamp
     FROM
-        date_spine ds
+        date_spine AS ds
     LEFT JOIN
         {{ ref('fact_trips') }} AS t
         ON
@@ -52,60 +54,54 @@ date_spine AS (
 
 , orders_extended AS (
     SELECT
-        ds.date_day AS snapshot_date
+        ds.snapshot_date
+        , ds.trip_id
         , o.order_id
         , o.price_eur
         , o.status
         , o.customer_id
-        , t.start_timestamp
+        , ds.start_timestamp
+        , ds.utilization_pct
     FROM
-        date_spine AS ds
+        trips_extended AS ds
     LEFT JOIN
         {{ ref('fact_orders') }} AS o
         ON
-            DATE(o.start_timestamp) = ds.date_day
-    LEFT JOIN
-        {{ ref('fact_trips') }} AS t
-        ON
-            o.trip_id = t.trip_id
+            o.trip_id = ds.trip_id
 )
 
 -- Aggregate business metrics per snapshot day
 , aggregated_trips AS (
     SELECT
         snapshot_date
-        , COUNT(DISTINCT trip_id) AS trip_count
-        , AVG(utilization_pct) AS avg_utilization_pct
-    FROM
-        trips_extended
-    GROUP BY 
-        snapshot_date
-)
-
-, aggregated_orders AS (
-    SELECT
-        snapshot_date
-        , COUNT(*) AS total_orders
-        , SUM(price_eur) AS total_revenue
-        , AVG(price_eur) AS avg_ticket_price
-        , SUM(CASE WHEN status = 'confirmed' THEN 1 ELSE 0 END) * 1.0 / COUNT(*) AS pct_confirmed_orders
-        , (COUNT(*) - COUNT(DISTINCT customer_id)) * 1.0 / COUNT(*) AS repeat_customer_pct
+        , ZEROIFNULL(COUNT(DISTINCT trip_id)) AS trip_count
+        , ZEROIFNULL(COUNT(DISTINCT order_id)) AS order_count
+        , ZEROIFNULL(SUM(price_eur)) AS total_revenue
+        , ZEROIFNULL(AVG(price_eur)) AS avg_ticket_price
+        , ZEROIFNULL(AVG(utilization_pct)) AS avg_utilization_pct
+        , ZEROIFNULL(TRY_DIVIDE(SUM(CASE WHEN LOWER(status) = 'finished' THEN 1 ELSE 0 END) * 1.0, COUNT(DISTINCT order_id))::INT) AS pct_confirmed_orders
+        , ZEROIFNULL(COUNT(DISTINCT customer_id)::INT) AS unique_customers
+        , ZEROIFNULL(TRY_DIVIDE((COUNT(DISTINCT order_id) - COUNT(DISTINCT customer_id)) * 1.0, NULLIF(COUNT(DISTINCT order_id), 0))::INT) AS repeat_customer_count
     FROM
         orders_extended
     GROUP BY
         snapshot_date
 )
 
--- Final SELECT
 SELECT
-    trips.snapshot_date
-    , trips.trip_count
-    , trips.avg_utilization_pct
-    , orders.total_orders
-    , orders.total_revenue
-    , orders.avg_ticket_price
-    , orders.pct_confirmed_orders
-    , orders.repeat_customer_pct
-FROM aggregated_trips trips
-LEFT JOIN aggregated_orders orders
-    ON trips.snapshot_date = orders.snapshot_date
+    snapshot_date
+    , trip_count
+    , order_count
+    , total_revenue
+    , avg_ticket_price
+    , avg_utilization_pct
+    , pct_confirmed_orders
+    , unique_customers
+    , repeat_customer_count
+    , CURRENT_TIMESTAMP AS last_updated_at
+FROM
+    aggregated_trips
+{% if is_dev_env() %}
+WHERE
+    DATE_TRUNC('DD', snapshot_date)::DATE >= DATE_ADD(CURRENT_DATE(), -90);
+{% endif %}

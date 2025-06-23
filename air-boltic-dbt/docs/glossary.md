@@ -284,3 +284,85 @@ Timestamp of the trip associated with this order, used as a proxy for booking ti
 The manufacturing make of an airplane (e.g., Boeing 737, Cessna Citation), used here as a proxy for airline or aircraft type performance analysis.
 {% enddocs %}
 
+{% docs int_success_summary %}
+      A snapshot-level fact model that tracks Air Boltic’s daily performance metrics using a dynamic date spine. It aggregates revenue, trip volume, customer activity, and booking quality for each date — simulating a snapshot-based metric table for time series and trend analysis.
+
+      Useful for:
+      - Revenue and volume trend analysis
+      - KPI dashboards
+      - Retention and operational health checks
+      - Baseline input for deviation alerts
+{% enddocs %}
+
+{% docs snapshot_date %}
+The date used as the snapshot reference, derived from the date spine. Acts as the grain of the model.
+{% enddocs %}
+
+{% docs trip_count %}
+The total number of unique trips started on this snapshot date.
+{% enddocs %}
+
+{% docs order_count %}
+The total number of orders associated with trips on this snapshot date.
+{% enddocs %}
+
+{% docs total_revenue %}
+Sum of all booking revenues (EUR) for trips active on this date.
+{% enddocs %}
+
+{% docs avg_ticket_price %}
+Average booking price for orders on this snapshot date.
+{% enddocs %}
+
+{% docs avg_utilization_pct %}
+Average seat utilization percentage across all trips on this snapshot date.
+{% enddocs %}
+
+{% docs pct_confirmed_orders %}
+Proportion of orders marked as "finished" out of total orders on this snapshot date.
+{% enddocs %}
+
+{% docs unique_customers %}
+Count of unique customers who placed an order on this snapshot date.
+{% enddocs %}
+
+{% docs repeat_customer_count %}
+Proportion of customers who placed more than one order on this snapshot date.
+{% enddocs %}
+
+{% docs market_level_success_score %}
+      Success scoring model at the destination city level.
+
+      It calculates a composite `success_score` based on normalized KPIs over a 30-day window:
+      - Seat utilization
+      - Revenue
+      - Repeat customer rate
+      - Booking confirmation rate
+
+      Used to benchmark market performance and identify high-potential regions.
+{% enddocs %}
+
+{% docs normalized_utilization %}
+Min-max normalized value of `avg_utilization_pct_30d` from the `int_market_success` model. Scaled between 0 and 1 across all cities.
+{% enddocs %}
+
+{% docs normalized_revenue %}
+Min-max normalized value of `total_revenue_30d` from the `int_market_success` model. Scaled between 0 and 1.
+{% enddocs %}
+
+{% docs normalized_repeat_pct %}
+Normalized version of the `repeat_customer_pct_30d` metric. Indicates customer stickiness and loyalty per market.
+{% enddocs %}
+
+{% docs normalized_confirmed_pct %}
+Normalized version of `pct_confirmed_orders_30d`. Represents operational reliability in each market.
+{% enddocs %}
+
+{% docs success_score %}
+Weighted composite score used to rank market performance. Helps identify patterns of success across Air Boltic's regions.
+{% enddocs %}
+
+{% docs last_updated_at %}
+Timestamp for when the success score was calculated. Helps with monitoring freshness of data.
+{% enddocs %}
+
