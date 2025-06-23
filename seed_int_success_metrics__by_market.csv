@@ -1,6 +1,0 @@
-destination_city,trip_count_7d,avg_utilization_pct_7d,total_orders_7d,total_revenue_7d,avg_ticket_price_7d,pct_confirmed_orders_7d,repeat_customer_pct_7d,trip_count_15d,avg_utilization_pct_15d,total_orders_15d,total_revenue_15d,avg_ticket_price_15d,pct_confirmed_orders_15d,repeat_customer_pct_15d,trip_count_30d,avg_utilization_pct_30d,total_orders_30d,total_revenue_30d,avg_ticket_price_30d,pct_confirmed_orders_30d,repeat_customer_pct_30d
-Berlin,47,0.58,254,12764.34,109.31,0.96,0.13,100,0.9,127,20127.55,255.9,0.86,0.22,41,0.82,61,21817.32,307.72,0.9,0.25
-Oslo,57,0.63,100,11280.99,264.19,1.0,0.18,59,0.57,224,9560.85,208.82,0.89,0.45,49,0.79,225,8474.71,467.23,0.88,0.18
-Madrid,24,0.8,270,20645.75,441.29,1.0,0.24,18,0.91,230,6440.36,396.16,0.96,0.13,42,0.7,200,25591.53,306.89,0.95,0.3
-Rome,44,0.6,120,15531.43,196.21,0.96,0.3,74,0.71,106,7412.98,278.29,0.98,0.24,34,0.86,58,12137.46,330.16,0.86,0.16
-Copenhagen,25,0.76,73,12275.75,406.15,0.91,0.19,51,0.76,285,25392.86,217.52,0.95,0.43,26,0.78,63,10838.36,393.45,0.9,0.16
