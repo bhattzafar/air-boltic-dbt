@@ -3,12 +3,14 @@
 
 Welcome to the official `dbt` project for **Air Boltic**, a case study designed to model, track, and analyze success metrics across a hypothetical airline booking platform operating in Europe.
 
-This project was created to identify **ingest all raw data for airboltic**, implement **base data models to track performance** of key KPIs, and lay the foundation for **strategic analytics and expansion planning**. The project allows analyst to:
-	•	Analyze reliable data.
- 	•	Access to fact tables and aggregated tables.
-  	•	Platform to setup jobs and schedules that allow monitoring and evaluations.
-   	•	easily pull up reports that can answer questions for a range of stakeholders from C-level management to internal and external teams.
+This project was created to identify **ingest all raw data for airboltic**, implement **base data models to track performance** of key KPIs, and lay the foundation for **strategic analytics and expansion planning**.
 
+The project allows analysts to:
+
+- ✅ Analyze reliable data.
+- ✅ Access fact tables and aggregated models.
+- ✅ Set up jobs and schedules for monitoring and evaluation.
+- ✅ Easily pull reports that answer stakeholder questions—from C-level to external teams.
 ---
 
 ## ⚠️ Note on Raw Data Formatting
