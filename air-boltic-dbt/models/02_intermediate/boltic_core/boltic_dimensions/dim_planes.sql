@@ -66,4 +66,19 @@ airplane_id AS (
         ROW_NUMBER() OVER (PARTITION BY airplane_id, manufacturer, model ORDER BY airplane_id) = 1
 )
 
-SELECT * FROM remove_duplicates
+, adding_segments AS (
+    SELECT
+        *
+        , CASE
+            WHEN max_seats > AVG(max_seats) OVER () THEN 'big_plane'
+            ELSE 'small_plane'
+        END AS plane_size_segment
+        , CASE
+            WHEN max_distance > AVG(max_distance) OVER () THEN 'long_hauler'
+            ELSE 'small_hauler'
+        END AS plane_distance_segment
+    FROM
+        remove_duplicates
+)
+
+SELECT * FROM adding_segments

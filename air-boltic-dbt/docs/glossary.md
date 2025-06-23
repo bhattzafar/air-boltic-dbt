@@ -366,3 +366,56 @@ Weighted composite score used to rank market performance. Helps identify pattern
 Timestamp for when the success score was calculated. Helps with monitoring freshness of data.
 {% enddocs %}
 
+{% docs int_customer_segment_analysis %}
+      Aggregated behavioral and revenue metrics for each unique customer segment across 7, 15, and 30-day time windows.
+      This model enables cohort-style insights into customer preferences by joining customer, trip, and order data.
+{% enddocs %}
+
+{% docs segment_id %}
+Unique identifier for the customer segment created using a hashed surrogate key across group, airplane, and segment dimensions.
+{% enddocs %}
+
+{% docs plane_size_segment %}
+Categorization of the aircraft by capacity (e.g., small, medium, large).
+{% enddocs %}
+
+{% docs plane_distance_segment %}
+Categorization of the aircraft by route distance (e.g., short-haul, long-haul).
+{% enddocs %}
+
+{% docs total_orders_15d %}
+Count of orders placed by customers in this segment in the past 15 days.
+{% enddocs %}
+
+{% docs total_orders_30d %}
+Count of orders placed by customers in this segment in the past 30 days.
+{% enddocs %}
+
+{% docs unique_customers_7d %}
+Number of distinct customers in the segment who placed orders in the last 7 days.
+{% enddocs %}
+
+{% docs unique_customers_15d %}
+Number of distinct customers in the segment who placed orders in the last 15 days.
+{% enddocs %}
+
+{% docs unique_customers_30d %}
+Number of distinct customers in the segment who placed orders in the last 30 days.
+{% enddocs %}
+
+{% docs total_revenue_15d %}
+Total revenue generated from orders in the segment during the past 15 days.
+{% enddocs %}
+
+{% docs total_revenue_30d %}
+Total revenue generated from orders in the segment during the past 30 days.
+{% enddocs %}
+
+{% docs avg_ticket_price_15d %}
+Average price of tickets sold to this segment over the past 15 days.
+{% enddocs %}
+
+{% docs avg_ticket_price_30d %}
+Average price of tickets sold to this segment over the past 30 days.
+{% enddocs %}
+

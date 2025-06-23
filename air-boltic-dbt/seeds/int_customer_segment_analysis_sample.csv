@@ -1,0 +1,4 @@
+segment_key,customer_group_id,customer_group_name,airplane_manufacturer,plane_size_segment,plane_distance_segment,total_orders_7d,unique_customers_7d,total_revenue_7d,avg_ticket_price_7d,cancellation_rate_7d,total_orders_15d,unique_customers_15d,total_revenue_15d,avg_ticket_price_15d,cancellation_rate_15d,total_orders_30d,unique_customers_30d,total_revenue_30d,avg_ticket_price_30d,cancellation_rate_30d
+segkey001,101,Leisure,Airbus,Large,Long Haul,34,30,10200.5,300.0,0.03,72,65,21200.0,294.4,0.025,140,130,41600.0,297.1,0.02
+segkey002,102,Business,Boeing,Medium,Medium Haul,58,54,19800.0,341.4,0.01,110,105,39600.0,360.0,0.02,220,210,79800.0,362.7,0.015
+segkey003,103,Frequent Flyers,Embraer,Small,Short Haul,12,11,3500.0,291.6,0.05,22,20,6300.0,286.4,0.045,45,43,12100.0,268.9,0.04

@@ -1,0 +1,69 @@
+version: 2
+
+models:
+  - name: int_customer_segment_analysis
+    description: "{{ doc('int_customer_segment_analysis') }}"
+    columns:
+      - name: segment_key
+        description: "{{ doc('segment_id') }}"
+        tests:
+          - not_null
+          - unique
+
+      - name: customer_group_id
+        description: "{{ doc('customer_group_id') }}"
+        tests:
+          - not_null:
+              severity: warn
+
+      - name: customer_group_name
+        description: "{{ doc('customer_group_name') }}"
+
+      - name: airplane_manufacturer
+        description: "{{ doc('manufacturer') }}"
+
+      - name: plane_size_segment
+        description: "{{ doc('plane_size_segment') }}"
+
+      - name: plane_distance_segment
+        description: "{{ doc('plane_distance_segment') }}"
+
+      - name: total_orders_7d
+        description: "{{ doc('total_orders_7d') }}"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              severity: warn
+
+      - name: total_orders_15d
+        description: "{{ doc('total_orders_15d') }}"
+
+      - name: total_orders_30d
+        description: "{{ doc('total_orders_30d') }}"
+
+      - name: unique_customers_7d
+        description: "{{ doc('unique_customers_7d') }}"
+
+      - name: unique_customers_15d
+        description: "{{ doc('unique_customers_15d') }}"
+
+      - name: unique_customers_30d
+        description: "{{ doc('unique_customers_30d') }}"
+
+      - name: total_revenue_7d
+        description: "{{ doc('total_revenue_7d') }}"
+
+      - name: total_revenue_15d
+        description: "{{ doc('total_revenue_15d') }}"
+
+      - name: total_revenue_30d
+        description: "{{ doc('total_revenue_30d') }}"
+
+      - name: avg_ticket_price_7d
+        description: "{{ doc('avg_ticket_price_7d') }}"
+
+      - name: avg_ticket_price_15d
+        description: "{{ doc('avg_ticket_price_15d') }}"
+
+      - name: avg_ticket_price_30d
+        description: "{{ doc('avg_ticket_price_30d') }}"

@@ -83,6 +83,16 @@ orders AS (
         {{ ref('fact_trips') }}
 )
 
+, get_plane_segments AS (
+    SELECT
+        airplane_id
+        , manufacturer AS airplane_manufacturer
+        , plane_size_segment
+        , plane_distance_segment
+    FROM
+        {{ ref('dim_planes') }}
+)
+
 -- Final join: enrich order facts with customer + trip metadata
 , joined AS (
     SELECT
@@ -100,6 +110,9 @@ orders AS (
         , c.customer_group_name
         , c.email_domain
         , c.customer_country
+        , p.airplane_manufacturer
+        , p.plane_size_segment
+        , p.plane_distance_segment
     FROM
         orders AS o
     LEFT JOIN
@@ -110,6 +123,10 @@ orders AS (
         dim_customers AS c
         ON
             o.customer_id = c.customer_id
+    LEFT JOIN
+        get_plane_segments AS p
+        ON
+            p.airplane_id = t.airplane_id
 )
 
 -- Deduplicate based on primary key
