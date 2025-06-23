@@ -1,6 +1,5 @@
-Got it! Here’s the entire README content fully written in Markdown, all in one block — just copy and paste this into your README.md file:
-
 # ✈️ Air Boltic — Analytics Engineer Case Study (dbt Project)
+## By Zafrullah Bhatti
 
 Welcome to the official `dbt` project for **Air Boltic**, a case study designed to model, track, and analyze success metrics across a hypothetical airline booking platform operating in Europe.
 
